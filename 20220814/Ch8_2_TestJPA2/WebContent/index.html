@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="BIG5">
+<title>Insert title here</title>
+<script>
+		function sendAccAndPass(){
+			let account = document.getElementById("accountId").value;
+			let password = document.getElementById("passwordId").value;
+			let msg = document.getElementById("msg");
+			const params = new URLSearchParams(`account=${account}&password=${password}`);
+			fetch("myuser",{body:params,method:"post"}).then(resp=>{
+				
+				return resp.json();
+			}).then(json=>{				
+				 console.log(json);
+				 console.log(json.id);
+				 console.log(json.password);
+				 
+				 msg.innerText = `id:${json.id} account:${json.account} password:${json.password}`
+			}).catch(error=>{
+				
+				console.error(error);
+				
+			});
+			
+		}
+
+</script>
+
+</head>
+<body>
+
+
+
+<input id="accountId" placeholder="帳號">
+<input id="passwordId" type="password" placeholder="密碼">
+<button onclick="sendAccAndPass()">註冊</button>
+<div id="msg"></div>
+</body>
+</html>
